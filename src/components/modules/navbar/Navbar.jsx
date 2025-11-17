@@ -7,6 +7,8 @@ import { CiMenuFries } from "react-icons/ci";
 import { IoIosSearch } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
 import { IoPersonCircle } from "react-icons/io5";
+import swal from 'sweetalert';
+// import { showSwal } from '@/utils/helpers';
 const Navbar = ({isLogin}) => {
     console.log(isLogin)
     const [fixTop, setFixTop] = useState(false);
@@ -25,7 +27,29 @@ const Navbar = ({isLogin}) => {
         return() => window.removeEventListener('scroll' , fixNavbarToTop )
     })
   const [isNavExpanded, setIsNavExpanded] = useState(true);
-
+ const logoutHandler = () => {
+    swal({
+        title:"Are you sure you want to log out?",
+        icon:"warning",
+        buttons:["No" , "Yes"],
+    }).then(async (result) => {
+        if(result) {
+             const res = await fetch("/api/auth/logout",{
+                method: "POST",
+             });
+             if(res.status === 200){
+                 console.log("hi");
+                swal({
+                     title:"You have successfully logged out.",
+                     icon:"success",
+                     buttons:"OK",
+                }).then((res) =>{
+                    location.replace("/")
+                })
+             }
+        }
+    })
+ }
     return (
         <>
     <nav className={fixTop ? styles.nav : styles.navbar}>
@@ -76,9 +100,10 @@ const Navbar = ({isLogin}) => {
             <li><Link href="#services" id="">Services</Link></li>
             <li><Link href="#cart" id="">Food Cart</Link></li>
             {isLogin ?(
-                    <li><Link href="/" id="">
+                    <li><Link href="/" id="" className={styles.loginName}>
                         {isLogin.name} 
                         <IoPersonCircle />
+                        <p className={styles.dropDownLogin} onClick={logoutHandler}>log out</p>
                     </Link></li>
                 ) :
                 (

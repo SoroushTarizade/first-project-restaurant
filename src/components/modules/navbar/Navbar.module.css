@@ -57,3 +57,20 @@
 .nav__btns{
     display: none;
 }
+.loginName{
+    position: relative;
+}
+.dropDownLogin{
+    display: none;
+}
+.loginName:hover .dropDownLogin{
+    display: inline-block;
+    position: absolute;
+    bottom:-2.5rem;
+    right: 0;
+    left: 0;
+    background-color: var(--primary-color);
+    color: azure;
+    padding: .5rem;
+    border-radius: .5rem;
+}

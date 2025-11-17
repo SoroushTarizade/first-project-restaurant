@@ -6,8 +6,9 @@ import { CiShoppingBasket } from "react-icons/ci";
 import { CiMenuFries } from "react-icons/ci";
 import { IoIosSearch } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
-const Navbar = (isLogin) => {
-
+import { IoPersonCircle } from "react-icons/io5";
+const Navbar = ({isLogin}) => {
+    console.log(isLogin)
     const [fixTop, setFixTop] = useState(false);
     useEffect(()=>{
         const fixNavbarToTop = () =>{
@@ -24,6 +25,7 @@ const Navbar = (isLogin) => {
         return() => window.removeEventListener('scroll' , fixNavbarToTop )
     })
   const [isNavExpanded, setIsNavExpanded] = useState(true);
+
     return (
         <>
     <nav className={fixTop ? styles.nav : styles.navbar}>
@@ -54,6 +56,14 @@ const Navbar = (isLogin) => {
         {
             !isNavExpanded ? (
         <ul className="nav__links open" id="nav–links">
+            {isLogin ? (
+                <li><Link href="/">
+                    <IoPersonCircle></IoPersonCircle>
+                    {isLogin.name}</Link></li>
+
+            ):(
+            <li><Link href="./login-register" id="">login / sign up</Link></li>
+            )}
             <li><Link href="#home" id="">Home</Link></li>
             <li><Link href="#menu" id="">Menu</Link></li>
             <li><Link href="#services" id="">Services</Link></li>
@@ -66,10 +76,14 @@ const Navbar = (isLogin) => {
             <li><Link href="#services" id="">Services</Link></li>
             <li><Link href="#cart" id="">Food Cart</Link></li>
             {isLogin ?(
-                    <li><Link href="/" id="">User Name</Link></li>
+                    <li><Link href="/" id="">
+                        {isLogin.name} 
+                        <IoPersonCircle />
+                    </Link></li>
                 ) :
                 (
-                    <li><Link href="./login-register" id="">login / sign up</Link></li>
+                    <li><Link href="./login-register" id="">login / sign up
+                    </Link></li>
                 )
             }
         </ul>

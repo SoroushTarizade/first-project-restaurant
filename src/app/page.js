@@ -15,10 +15,21 @@ export default async function Home() {
   const token = cookies().get("token");
   let user = null;
 
-  if(token){
+  if (token) {
     const tokenPayLoad = verifyAccessToken(token.value);
-    if (tokenPayLoad){
-      user = await UserModel.findOne({ email: tokenPayLoad.email });
+
+    if (tokenPayLoad) {
+      const userDoc = await UserModel.findOne(
+        { email: tokenPayLoad.email },
+        { password: 0, refreshToken: 0 } // حذف اطلاعات حساس
+      ).lean();
+
+      if (userDoc) {
+        user = {
+          ...userDoc,
+          _id: userDoc._id.toString(),
+        };
+      }
     }
   }
 

@@ -1,3 +1,18 @@
+# Restaurant Template Project
+
+I found a restaurant website design template that I liked, and I built my own version inspired by that design.  
+This project is developed with **Next.js** and includes:
+
+- Fully responsive UI  
+- Login & Signup pages added  
+- Clean and modern layout  
+- Inspired only from the template’s design (not a full copy)
+
+This project helped me practice routing, components, authentication pages, and responsive design in Next.js.
+
+
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started

@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 import Link from 'next/link';
-import styles from "./Login.module.css"
+import styles from "./login.module.css";
 import Sms from './Sms';
 import { showSwal } from '@/utils/helpers';
 import { ValidateEmail, ValidatePassword } from '@/utils/auth';
